@@ -20,6 +20,8 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+			  "src/manifest.webmanifest",
+			  "src/favicon.ico",
               {
                 "glob": "**/*",
                 "input": "src/assets",
@@ -36,23 +38,13 @@
 				"output": "assets"
 			  },
 			  {
-				"glob": "manifest.webmanifest",
-				"input": "public",
-				"output": ""
-			  },
-			  {
 				"glob": "**/*",
-				"input": "public/icons",
+				"input": "src/assets/icons",
 				"output": "icons"
 			  },
 			  {
-				"glob": "favicon.ico",
-				"input": "public/icons",
-				"output": ""
-			  },
-			  {
 				"glob": "**/*",
-				"input": "public/screenshots",
+				"input": "src/assets/screenshots",
 				"output": "screenshots"
 			  }
             ],

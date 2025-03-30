@@ -20,11 +20,15 @@
 		  type="image/png"
 		  href="assets/icon/favicon.png" />
 
-	<!-- add to homescreen for ios -->
+	<!-- iOS -->
 	<meta name="mobile-web-app-capable"
 		  content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style"
-		  content="black" />
+	<meta name="mobile-web-app-status-bar-style"
+		  content="black-translucent">
+	<meta name="mobile-web-app-title"
+		  content="WeightingGame">
+	<meta name="format-detection"
+		  content="telephone=no">
 
 	<script>
 		fetch('./assets/environment.json')
@@ -39,7 +43,7 @@
 			});
 	</script>
 	<link rel="manifest"
-		  href="./manifest.webmanifest">
+		  href="/manifest.webmanifest">
 	<meta name="theme-color"
 		  content="#000000">
 </head>
