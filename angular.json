@@ -44,6 +44,11 @@
 				"glob": "**/*",
 				"input": "public/icons",
 				"output": "icons"
+			  },
+			  {
+				"glob": "**/*",
+				"input": "public/screenshots",
+				"output": "screenshots"
 			  }
             ],
             "styles": ["src/global.scss", "src/theme/variables.scss"],
