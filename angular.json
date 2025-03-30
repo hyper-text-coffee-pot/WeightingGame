@@ -46,6 +46,11 @@
 				"output": "icons"
 			  },
 			  {
+				"glob": "favicon.ico",
+				"input": "public/icons",
+				"output": ""
+			  },
+			  {
 				"glob": "**/*",
 				"input": "public/screenshots",
 				"output": "screenshots"
