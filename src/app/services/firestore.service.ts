@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Firestore, setDoc, doc, updateDoc, arrayUnion, getDoc } from '@angular/fire/firestore';
-import { User } from 'firebase/auth';
 import { IWeightingGameUser } from '../abstractions/i-weighting-game-user';
 import { WeightRecord } from '../models/user/weight-record';
+import { WeightingGameUser } from '../models/user/weighting-game-user';
 
 @Injectable({
 	providedIn: 'root'
@@ -25,11 +25,14 @@ export class FirestoreService
 	 * Sign a user up or log them in.
 	 * Creates a new user document in all the necessary collections.
 	 */
-	public addUser(userId: string): Promise<any>
+	public addUser(weightingGameUser: WeightingGameUser): Promise<any>
 	{
-		userId = userId.trim();
+		let userId = weightingGameUser.authUser?.uid.trim();
 		// Use merge: true to avoid overwriting, make sure you just send an empty object.
-		return setDoc(doc(this.firestore, `users/${ userId }`), {}, { merge: true });
+		return setDoc(doc(this.firestore, `users/${ userId }`), {
+			displayName: weightingGameUser.displayName,
+			emailAddress: weightingGameUser.emailAddress
+		}, { merge: true });
 	}
 
 	public async getUserFromFirestore(userId: string | undefined): Promise<IWeightingGameUser | null>

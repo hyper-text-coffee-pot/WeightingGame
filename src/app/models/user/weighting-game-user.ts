@@ -13,6 +13,10 @@ export class WeightingGameUser
 
 	public authUser?: User;
 
+	public displayName: string = '';
+
+	public emailAddress: string = '';
+
 	public isTutorialComplete: boolean = false;
 
 	public weightRecords: WeightRecord[] = [];

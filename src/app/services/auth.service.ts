@@ -55,7 +55,7 @@ export class AuthService
 									else
 									{
 										// If the user does not have data in Firestore, add the user to Firestore.
-										this.firestoreService.addUser(userId)
+										this.firestoreService.addUser(weightingGameUser)
 											.then(() =>
 											{
 												// Regardless of whether the user has data in Firestore, set the user in local storage.

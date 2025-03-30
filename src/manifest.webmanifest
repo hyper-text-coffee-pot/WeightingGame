@@ -1,11 +1,12 @@
 {
   "id": "/",
-  "name": "weightinggame",
-  "short_name": "weightinggame",
+  "name": "Weighting Game",
+  "short_name": "Weighting Game",
   "description": "A weight tracking app that does 1 thing really well. Track your weight.",
   "theme_color": "#000000",
   "background_color": "#000000",
   "display": "standalone",
+  "orientation": "portrait",
   "scope": "./",
   "start_url": "./",
   "icons": [

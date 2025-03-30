@@ -11,13 +11,13 @@
 {
 	width: 96px;
 	height: 96px;
-	border-radius: 50%; // Optional: to make it circular
-}
 
-.line-break
-{
-	border: 0;
-	height: 1px;
-	background: #ccc; // Change this to your desired color
-	margin: 20px 0; // Adjust the margin as needed
+	& img
+	{
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 50%;
+	}
+
 }
