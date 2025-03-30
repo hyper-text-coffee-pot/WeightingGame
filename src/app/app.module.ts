@@ -10,6 +10,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideAnalytics, getAnalytics } from '@angular/fire/analytics';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigService } from './services/config.service';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 // Supply the Firebase configuration to the Firebase module.
 export function firebaseConfigFactory(configService: ConfigService)
@@ -41,7 +42,8 @@ export function firebaseConfigFactory(configService: ConfigService)
 		provideFirebaseApp(() => initializeApp(firebaseConfigFactory(new ConfigService()))),
 		provideAuth(() => getAuth()),
 		provideFirestore(() => getFirestore()),
-		provideAnalytics(() => getAnalytics())
+		provideAnalytics(() => getAnalytics()),
+		provideCharts(withDefaultRegisterables())
 	],
 	bootstrap: [AppComponent],
 })
