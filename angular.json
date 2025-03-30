@@ -34,6 +34,16 @@
 				"glob": "environment.json",
 				"input": "src/assets",
 				"output": "assets"
+			  },
+			  {
+				"glob": "manifest.webmanifest",
+				"input": "public",
+				"output": ""
+			  },
+			  {
+				"glob": "**/*",
+				"input": "public/icons",
+				"output": "icons"
 			  }
             ],
             "styles": ["src/global.scss", "src/theme/variables.scss"],
