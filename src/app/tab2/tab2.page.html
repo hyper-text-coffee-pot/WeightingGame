@@ -22,37 +22,33 @@
 		</ion-refresher-content>
 	</ion-refresher>
 	<p class="center-text">Pull to Refresh</p>
-	@if (habits.length > 0) {
-	@for (item of habits; track item) {
+	@if (weightRecords.length > 0) {
+	@for (item of weightRecords; track item) {
 	<ion-card>
 		<ion-card-header>
-			<ion-card-title>{{item.habitName}}</ion-card-title>
+			<ion-card-title>Weight</ion-card-title>
 		</ion-card-header>
 		<ion-card-content>
 			<ul>
-				<li>Context: {{item.context}}</li>
-				<li>Emoji mood: {{item.emojiMood}}</li>
-				<li>Emotion: {{item.emotion}}</li>
-				<li>Motivation level: {{item.motivationLevel}}</li>
-				<li>Trigger: {{item.trigger}}</li>
-				<li>Trigger: {{item.timestamp | date}}</li>
+				<li>Weight: {{item.currentWeight}}</li>
+				<li>Logged: {{item.timestamp | date: 'medium' }}</li>
 			</ul>
 		</ion-card-content>
 	</ion-card>
 	}
 	}
-	@if (habits.length == 0)
+	@if (weightRecords.length == 0)
 	{
 	<ion-card>
 		<ion-card-header>
-			<ion-card-title>No Habits Added Yet</ion-card-title>
+			<ion-card-title>No Weigh-Ins Added Yet</ion-card-title>
 		</ion-card-header>
 		<ion-card-content>
-			You have not added any habits. Start by adding a new habit to track your progress.
+			You have not added any weigh-ins. Start by adding a weight record to track your progress.
 		</ion-card-content>
 		<ion-button expand="block"
 					routerLink="/tabs/tab1">
-			Add New Habit
+			Log Weight
 		</ion-button>
 	</ion-card>
 	}

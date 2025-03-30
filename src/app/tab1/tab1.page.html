@@ -15,85 +15,32 @@
 			<ion-card-title>🧠 How do I do this?</ion-card-title>
 		</ion-card-header>
 		<ion-card-content>
-			The first step to fixing a habit is identifying a habit. Any time you notice yourself doing something habitual, pop this open and log it.
+			Just enter your weight, hit submit, and move on with your life! It's that simple.
 		</ion-card-content>
 		<ion-button fill="clear"
 					(click)="closeCard()">Got It</ion-button>
 	</ion-card>
 	}
 
-	<form [formGroup]="habitForm"
-		  (ngSubmit)="logHabit()">
-		<ion-list>
-			<ion-title size="large">📝 Let's Log a Habit!</ion-title>
+	<div class="form-wrapper">
+		<form [formGroup]="weightLoggerForm"
+			  (ngSubmit)="logWeight()">
 			<ion-list>
-				<ion-item>
-					<ion-input label="Habit Name"
-							   labelPlacement="floating"
-							   type="text"
-							   placeholder="Procrastinating"
-							   name="habitName"
-							   formControlName="habitName"
-							   required="required"></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-input label="Emoji Mood"
-							   labelPlacement="floating"
-							   type="text"
-							   placeholder="😊 Add your own emoji"
-							   name="emojiMood"
-							   formControlName="emojiMood"
-							   required="required"></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-input label="How are you feeling right now?"
-							   labelPlacement="floating"
-							   type="text"
-							   placeholder="Happy"
-							   name="emotion"
-							   formControlName="emotion"
-							   required="required"></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-input label="Trigger"
-							   labelPlacement="floating"
-							   type="text"
-							   placeholder="My job"
-							   name="trigger"
-							   formControlName="trigger"
-							   required="required"></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-input label="Environment or Context"
-							   labelPlacement="floating"
-							   type="text"
-							   placeholder="In the office/At home"
-							   name="context"
-							   formControlName="context"
-							   required="required"></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-range label="Motivation level"
-							   labelPlacement="stacked"
-							   aria-label="Motivation Level"
-							   [min]="0"
-							   [max]="5"
-							   [value]="3"
-							   [pin]="true"
-							   [ticks]="true"
-							   [snaps]="true"
-							   name="motivationLevel"
-							   formControlName="motivationLevel">
-						<ion-icon slot="start"
-								  name="sad-outline"></ion-icon>
-						<ion-icon slot="end"
-								  name="happy-outline"></ion-icon>
-					</ion-range>
-				</ion-item>
+				<ion-list>
+					<ion-item>
+						<ion-input label="Enter Current Weight 🙂"
+								   labelPlacement="floating"
+								   type="number"
+								   placeholder="150"
+								   name="currentWeight"
+								   formControlName="currentWeight"
+								   required="required"></ion-input>
+					</ion-item>
+				</ion-list>
 			</ion-list>
-		</ion-list>
-		<ion-button expand="block"
-					type="submit"
-					[disabled]="habitForm.invalid">Log Habit</ion-button>
-	</form>
+			<ion-button expand="block"
+						type="submit"
+						[disabled]="weightLoggerForm.invalid">Log My Weight</ion-button>
+		</form>
+	</div>
 </ion-content>

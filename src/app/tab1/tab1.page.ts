@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FirestoreService } from '../services/firestore.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { Habit } from '../models/user/habit';
+import { WeightRecord } from '../models/user/weight-record';
 import { NotificationService } from '../services/notification.service';
-import { IHabitMapperUser } from '../abstractions/i-habit-mapper-user';
+import { IWeightingGameUser } from '../abstractions/i-weighting-game-user';
 
 @Component({
 	selector: 'app-tab1',
@@ -24,7 +24,7 @@ export class Tab1Page
 		if (currentUser?.authUser?.uid)
 		{
 			this.firestoreService.getUserFromFirestore(currentUser.authUser.uid)
-				.then((user: IHabitMapperUser | null) =>
+				.then((user: IWeightingGameUser | null) =>
 				{
 					if (user)
 					{
@@ -33,20 +33,15 @@ export class Tab1Page
 				});
 		}
 
-		this.habitForm = this.formBuilder.group({
-			habitName: ['', Validators.required],
-			emojiMood: ['', Validators.required],
-			emotion: ['', Validators.required],
-			trigger: ['', Validators.required],
-			context: ['', Validators.required],
-			motivationLevel: ['', Validators.required]
+		this.weightLoggerForm = this.formBuilder.group({
+			currentWeight: ['', Validators.required]
 		});
 	}
 
 	// Default to false to prevent annoying flicker.
 	public isTutorialComplete: boolean = true;
 
-	public habitForm: FormGroup;
+	public weightLoggerForm: FormGroup;
 
 	public closeCard(): void
 	{
@@ -58,9 +53,9 @@ export class Tab1Page
 		}
 	}
 
-	public async logHabit(): Promise<void>
+	public async logWeight(): Promise<void>
 	{
-		if (this.habitForm.invalid)
+		if (this.weightLoggerForm.invalid)
 		{
 			await this.notificationService.presentAlert("Uh oh! 😔", "Please check the form and try again.", "red");
 			return;
@@ -68,15 +63,10 @@ export class Tab1Page
 		else
 		{
 			const user = this.authService.getCurrentUser();
-			if (user?.authUser?.uid && this.habitForm.valid)
+			if (user?.authUser?.uid && this.weightLoggerForm.valid)
 			{
-				let habit = new Habit(
-					this.habitForm.value.habitName,
-					this.habitForm.value.emojiMood,
-					this.habitForm.value.emotion,
-					this.habitForm.value.trigger,
-					this.habitForm.value.context,
-					this.habitForm.value.motivationLevel
+				let habit = new WeightRecord(
+					this.weightLoggerForm.value.currentWeight
 				);
 
 				this.firestoreService.addHabit(user?.authUser?.uid, habit)
@@ -84,7 +74,7 @@ export class Tab1Page
 					{
 						this.authService.refreshCurrentUser(false);
 						this.notificationService.presentToast("Success! 🎉", "Your habit has been logged.", "success", "top");
-						this.habitForm.reset();
+						this.weightLoggerForm.reset();
 					});
 			}
 		}

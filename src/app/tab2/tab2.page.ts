@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Habit } from '../models/user/habit';
+import { WeightRecord } from '../models/user/weight-record';
 import { FirestoreService } from '../services/firestore.service';
 import { AuthService } from '../services/auth.service';
 
@@ -21,7 +21,7 @@ export class Tab2Page
 		this.loadHabits();
 	}
 
-	public habits: Habit[] = [];
+	public weightRecords: WeightRecord[] = [];
 
 	public loadHabits(event?: any): void
 	{
@@ -33,7 +33,7 @@ export class Tab2Page
 				{
 					if (user)
 					{
-						this.habits = user.habits;
+						this.weightRecords = user.weightRecords;
 					}
 
 					if (event)

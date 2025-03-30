@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HabitMapperUser } from '../models/user/habit-mapper-user';
+import { WeightingGameUser } from '../models/user/weighting-game-user';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UserStorageService
 {
-	private userStorageSchema: string = "__hmap_user_storage__";
+	private userStorageSchema: string = "__wghtgme_user_storage__";
 
 	constructor() { }
 
-	public getUser(): HabitMapperUser | null
+	public getUser(): WeightingGameUser | null
 	{
 		return this.getItem(this.userStorageSchema);
 	}
 
-	public setUser(user: HabitMapperUser): void
+	public setUser(user: WeightingGameUser): void
 	{
 		this.setItem(this.userStorageSchema, user);
 	}

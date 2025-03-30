@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { FirestoreService } from './firestore.service';
 import { UserStorageService } from './user-storage.service';
 import { LoggerService } from './logger.service';
-import { HabitMapperUser } from '../models/user/habit-mapper-user';
-import { IHabitMapperUser } from '../abstractions/i-habit-mapper-user';
+import { WeightingGameUser } from '../models/user/weighting-game-user';
+import { IWeightingGameUser } from '../abstractions/i-weighting-game-user';
 
 @Injectable({
 	providedIn: 'root'
@@ -37,12 +37,12 @@ export class AuthService
 						const user = result.user as User;
 
 						// Map results to Habit Mapper User
-						const habitMapperUser: HabitMapperUser = new HabitMapperUser(user);
-						const userId = habitMapperUser?.authUser?.uid || '';
+						const weightingGameUser: WeightingGameUser = new WeightingGameUser(user);
+						const userId = weightingGameUser?.authUser?.uid || '';
 						if (userId)
 						{
 							this.firestoreService.getUserFromFirestore(userId)
-								.then((userDoc: IHabitMapperUser | null) =>
+								.then((userDoc: IWeightingGameUser | null) =>
 								{
 									if (userDoc != null && typeof userDoc !== 'undefined')
 									{
@@ -86,7 +86,7 @@ export class AuthService
 		}
 	}
 
-	public getCurrentUser(): HabitMapperUser | null
+	public getCurrentUser(): WeightingGameUser | null
 	{
 		return this.userStorageService.getUser();
 	}
@@ -103,20 +103,20 @@ export class AuthService
 			const firebaseUser = this.afAuth.currentUser;
 			if (firebaseUser)
 			{
-				const habitMapperUser = new HabitMapperUser(firebaseUser);
-				this.firestoreService.getUserFromFirestore(habitMapperUser?.authUser?.uid)
-					.then((userDoc: IHabitMapperUser | null) =>
+				const weightingGameUser = new WeightingGameUser(firebaseUser);
+				this.firestoreService.getUserFromFirestore(weightingGameUser?.authUser?.uid)
+					.then((userDoc: IWeightingGameUser | null) =>
 					{
 						if (userDoc)
 						{
-							habitMapperUser.MapFromFirestoreData(userDoc);
+							weightingGameUser.MapFromFirestoreData(userDoc);
 
 							if (!includeHabits)
 							{
-								habitMapperUser.habits = [];
+								weightingGameUser.weightRecords = [];
 							}
 
-							this.userStorageService.setUser(habitMapperUser);
+							this.userStorageService.setUser(weightingGameUser);
 							resolve();
 						}
 					});

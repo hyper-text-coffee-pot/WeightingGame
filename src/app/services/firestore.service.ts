@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Firestore, setDoc, doc, updateDoc, arrayUnion, getDoc } from '@angular/fire/firestore';
-import { Habit } from '../models/user/habit';
-import { HabitMapperUser } from '../models/user/habit-mapper-user';
 import { User } from 'firebase/auth';
-import { IHabitMapperUser } from '../abstractions/i-habit-mapper-user';
+import { IWeightingGameUser } from '../abstractions/i-weighting-game-user';
+import { WeightRecord } from '../models/user/weight-record';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,17 +12,12 @@ export class FirestoreService
 	constructor(private firestore: Firestore) { }
 
 	// Add a new document to a collection
-	public addHabit(userId: string, data: Habit): Promise<any>
+	public addHabit(userId: string, data: WeightRecord): Promise<any>
 	{
-		const habitData = data.toPlainObject();
+		const weightRecordData = data.toPlainObject();
 		return updateDoc(doc(this.firestore, `users/${ userId }`),
 			{
-				habits: arrayUnion(habitData),
-				previousHabitsList: arrayUnion(habitData.habitName.trim()),
-				previousEmojisList: arrayUnion(habitData.emojiMood),
-				previousEmotionsList: arrayUnion(habitData.emotion.trim()),
-				previousTriggersList: arrayUnion(habitData.trigger.trim()),
-				previousContextsList: arrayUnion(habitData.context.trim()),
+				weightRecords: arrayUnion(weightRecordData)
 			});
 	}
 
@@ -38,7 +32,7 @@ export class FirestoreService
 		return setDoc(doc(this.firestore, `users/${ userId }`), {}, { merge: true });
 	}
 
-	public async getUserFromFirestore(userId: string | undefined): Promise<IHabitMapperUser | null>
+	public async getUserFromFirestore(userId: string | undefined): Promise<IWeightingGameUser | null>
 	{
 		if (!userId)
 		{
@@ -49,7 +43,7 @@ export class FirestoreService
 		const userDoc = await getDoc(userDocRef);
 		if (userDoc.exists())
 		{
-			return userDoc.data() as IHabitMapperUser;
+			return userDoc.data() as IWeightingGameUser;
 		}
 		else
 		{
