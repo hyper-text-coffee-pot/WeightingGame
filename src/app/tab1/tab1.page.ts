@@ -73,7 +73,7 @@ export class Tab1Page
 					.then(() =>
 					{
 						this.authService.refreshCurrentUser(false);
-						this.notificationService.presentToast("Success! 🎉", "Your habit has been logged.", "success", "top");
+						this.notificationService.presentToast("Success! 🎉", "Your weight has been logged.", "success", "top");
 						this.weightLoggerForm.reset();
 					});
 			}
