@@ -1,8 +1,8 @@
 {
-  "name": "app",
-  "short_name": "app",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "weightinggame",
+  "short_name": "weightinggame",
+  "theme_color": "#000000",
+  "background_color": "#000000",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
