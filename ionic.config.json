@@ -1,0 +1,7 @@
+{
+  "name": "HabitMapper",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

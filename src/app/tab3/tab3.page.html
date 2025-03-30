@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-title>
+			<ion-icon name="settings"></ion-icon>
+			Settings
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-header collapse="condense">
+		<ion-toolbar>
+			<ion-title size="large">Profile</ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<ion-card class="center-content">
+		<ion-card-header class="center-content">
+			<ion-card-subtitle>Controlled by Google&trade;</ion-card-subtitle><br />
+			<ion-img [src]="currentUser?.authUser?.photoURL"
+					 alt="Profile Picture"
+					 class="profile-picture"></ion-img>
+			<ion-card-title>{{currentUser?.authUser?.displayName}}</ion-card-title>
+			<ion-card-subtitle>{{currentUser?.authUser?.email}}</ion-card-subtitle>
+		</ion-card-header>
+	</ion-card>
+	<hr class="line-break">
+	<ion-button expand="block"
+				color="danger"
+				fill="outline"
+				(click)="signOut()">
+		Logout
+	</ion-button>
+</ion-content>

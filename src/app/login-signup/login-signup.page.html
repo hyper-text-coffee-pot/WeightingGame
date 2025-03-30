@@ -1,0 +1,33 @@
+<ion-content [fullscreen]="true"
+			 class="ion-padding">
+	<div class="login-container">
+		<ion-card class="clear">
+			<ion-card-header>
+				<ion-card-title>⚠️ Active Development 🧑‍💻</ion-card-title>
+			</ion-card-header>
+			<ion-card-content>
+				This app is currently in active development. Some features may not work as expected and any and all data may be deleted at any time. Thank you for testing with us!
+			</ion-card-content>
+		</ion-card>
+		<img src="assets/icon/icon.png"
+			 alt="Logo"
+			 class="logo clear" />
+		<ion-button expand="block"
+					color="primary"
+					class="login-button"
+					(click)="signInWithGoogle()">
+			<ion-icon slot="start"
+					  name="logo-google"></ion-icon>
+			Sign in with Google
+		</ion-button>
+		<p class="policies">
+			By signing in, you agree to our
+			<a href="https://habitmapper.com/privacy-policy.html"
+			   target="_blank">Privacy Policy</a> and
+			<a href="https://habitmapper.com/terms-and-conditions.html"
+			   target="_blank">Terms and Conditions</a> and 
+			<a href="https://habitmapper.com/cookie-policy.html"
+			   target="_blank">Cookie Policy</a>.
+		</p>
+	</div>
+</ion-content>

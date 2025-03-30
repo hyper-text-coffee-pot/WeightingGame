@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-title>
+			<ion-icon name="stats-chart"></ion-icon>
+			Metrics
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-header collapse="condense">
+		<ion-toolbar>
+			<ion-title size="large">Tab 2</ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<ion-refresher slot="fixed"
+				   (ionRefresh)="loadHabits($event)">
+		<ion-refresher-content pullingIcon="arrow-down-circle-outline"
+							   pullingText="Pull to refresh"
+							   refreshingSpinner="circles"
+							   refreshingText="Refreshing...">
+		</ion-refresher-content>
+	</ion-refresher>
+	<p class="center-text">Pull to Refresh</p>
+	@if (habits.length > 0) {
+	@for (item of habits; track item) {
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>{{item.habitName}}</ion-card-title>
+		</ion-card-header>
+		<ion-card-content>
+			<ul>
+				<li>Context: {{item.context}}</li>
+				<li>Emoji mood: {{item.emojiMood}}</li>
+				<li>Emotion: {{item.emotion}}</li>
+				<li>Motivation level: {{item.motivationLevel}}</li>
+				<li>Trigger: {{item.trigger}}</li>
+				<li>Trigger: {{item.timestamp | date}}</li>
+			</ul>
+		</ion-card-content>
+	</ion-card>
+	}
+	}
+	@if (habits.length == 0)
+	{
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>No Habits Added Yet</ion-card-title>
+		</ion-card-header>
+		<ion-card-content>
+			You have not added any habits. Start by adding a new habit to track your progress.
+		</ion-card-content>
+		<ion-button expand="block"
+					routerLink="/tabs/tab1">
+			Add New Habit
+		</ion-button>
+	</ion-card>
+	}
+</ion-content>
