@@ -28,10 +28,12 @@ export class FirestoreService
 	public addUser(weightingGameUser: WeightingGameUser): Promise<any>
 	{
 		let userId = weightingGameUser.authUser?.uid.trim();
+		let userDisplayName = weightingGameUser.authUser?.displayName?.trim();
+		let userEmail = weightingGameUser.authUser?.email?.trim();
 		// Use merge: true to avoid overwriting, make sure you just send an empty object.
 		return setDoc(doc(this.firestore, `users/${ userId }`), {
-			displayName: weightingGameUser.displayName,
-			emailAddress: weightingGameUser.emailAddress
+			displayName: userDisplayName,
+			emailAddress: userEmail
 		}, { merge: true });
 	}
 
