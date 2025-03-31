@@ -3,13 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 export class WeightRecord
 {
 	public id: string = '';
-	public currentWeight: number = 0.00;
+	public weightLbsOz: number = 0.0;
 	public timestamp: string = '';
 
-	constructor(currentWeight: number)
+	constructor(newWeightLbsOz: number)
 	{
 		this.id = uuidv4();
-		this.currentWeight = currentWeight;
+		this.weightLbsOz = newWeightLbsOz;
 		this.timestamp = new Date().toISOString();
 	}
 
@@ -20,7 +20,7 @@ export class WeightRecord
 	{
 		return {
 			id: this.id,
-			currentWeight: this.currentWeight,
+			weightLbsOz: this.weightLbsOz,
 			timestamp: this.timestamp
 		};
 	}

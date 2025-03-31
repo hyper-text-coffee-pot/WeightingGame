@@ -34,7 +34,7 @@ export function firebaseConfigFactory(configService: ConfigService)
 		AppRoutingModule,
 		ReactiveFormsModule,
 		ServiceWorkerModule.register('./ngsw-worker.js', {
-			enabled: true,
+			enabled: !isDevMode() && 'serviceWorker' in navigator,
 			registrationStrategy: 'registerWhenStable:30000'
 		})
 	],
