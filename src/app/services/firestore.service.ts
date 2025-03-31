@@ -12,7 +12,7 @@ export class FirestoreService
 	constructor(private firestore: Firestore) { }
 
 	// Add a new document to a collection
-	public addHabit(userId: string, data: WeightRecord): Promise<any>
+	public addWeightRecord(userId: string, data: WeightRecord): Promise<any>
 	{
 		const weightRecordData = data.toPlainObject();
 		return updateDoc(doc(this.firestore, `users/${ userId }`),

@@ -65,17 +65,24 @@ export class Tab1Page
 			const user = this.authService.getCurrentUser();
 			if (user?.authUser?.uid && this.weightLoggerForm.valid)
 			{
-				let habit = new WeightRecord(
-					this.weightLoggerForm.value.currentWeight
-				);
-
-				this.firestoreService.addHabit(user?.authUser?.uid, habit)
-					.then(() =>
-					{
-						this.authService.refreshCurrentUser(false);
-						this.notificationService.presentToast("Success! 🎉", "Your weight has been logged.", "success", "top");
-						this.weightLoggerForm.reset();
-					});
+				if (isNaN(this.weightLoggerForm.value.currentWeight) || this.weightLoggerForm.value.currentWeight <= 0)
+				{
+					await this.notificationService.presentAlert("Uh oh! 😔", "Please enter a valid weight.", "red");
+					return;
+				}
+				else
+				{
+					// Convert to consistent decimal format.
+					let newWeightLbsOz = parseFloat(this.weightLoggerForm.value.currentWeight.toFixed(2));
+					let weightRecord = new WeightRecord(newWeightLbsOz);
+					this.firestoreService.addWeightRecord(user?.authUser?.uid, weightRecord)
+						.then(() =>
+						{
+							this.authService.refreshCurrentUser(false);
+							this.notificationService.presentToast("Success! 🎉", "Your weight has been logged.", "success", "top");
+							this.weightLoggerForm.reset();
+						});
+				}
 			}
 		}
 	}

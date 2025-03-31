@@ -36,6 +36,30 @@ export class Tab2Page
 				display: true,
 				position: 'top',
 			},
+			tooltip: {
+				callbacks: {
+					label: (context) =>
+					{
+						console.log(context);
+						console.log(this.weightRecords);
+						const index = context.dataIndex;
+						const weight = context.raw; // The weight value
+						const record = this.weightRecords[index]; // Get the corresponding weight record
+						if (record)
+						{
+							const timestamp = new Date(record.timestamp).toLocaleString('en-US', {
+								month: 'long',
+								day: 'numeric',
+								year: 'numeric',
+								hour: '2-digit',
+								minute: '2-digit',
+							});
+							return `Weight: ${ weight } lbs\nTimestamp: ${ timestamp }`;
+						}
+						return `Weight: ${ weight } lbs`;
+					},
+				},
+			},
 		},
 		scales: {
 			x: {
@@ -81,24 +105,32 @@ export class Tab2Page
 
 										// Find the weight record for this date
 										const record = this.weightRecords.find(
-											(record) =>
-												new Date(record.timestamp).toLocaleDateString('en-US') === formattedDate
+											(record) => new Date(record.timestamp).toLocaleDateString('en-US') === formattedDate
 										);
 
 										// Return the weight if a record exists, otherwise return null or 0
-										return record ? record.currentWeight : null;
+										return record ? record.weightLbsOz : null;
 									}),
-									label: 'Body Weight (lbs)',
+									label: 'Weight (lbs)',
 									borderColor: 'rgba(75,192,192,1)',
 									backgroundColor: 'rgba(75,192,192,0.2)',
-									fill: true,
+									fill: true
 								},
 							],
 							labels: Array.from({ length: daysToLoad }, (_, i) =>
 							{
 								const date = new Date();
 								date.setDate(date.getDate() - ((daysToLoad - 1) - i)); // Generate dates for the last 7 days
-								return date.toLocaleDateString('en-US'); // Format as short date
+								if (date.getFullYear() === new Date().getFullYear())
+								{
+									// Format as "Month Day"
+									return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+								}
+								else
+								{
+									// Format as "Month Day, Year"
+									return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+								}
 							}),
 						};
 					}
