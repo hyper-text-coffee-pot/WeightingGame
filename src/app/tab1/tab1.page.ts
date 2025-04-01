@@ -31,6 +31,12 @@ export class Tab1Page
 						this.isTutorialComplete = user.isTutorialComplete;
 					}
 				});
+
+			this.firestoreService.getAllWeightRecords(currentUser.authUser.uid)
+				.then((weightRecords: WeightRecord[]) =>
+				{
+					console.log(weightRecords);
+				});
 		}
 
 		this.weightLoggerForm = this.formBuilder.group({
