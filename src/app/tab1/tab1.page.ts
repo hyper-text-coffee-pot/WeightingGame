@@ -75,12 +75,17 @@ export class Tab1Page
 					// Convert to consistent decimal format.
 					let newWeightLbsOz = parseFloat(this.weightLoggerForm.value.currentWeight.toFixed(2));
 					let weightRecord = new WeightRecord(newWeightLbsOz);
-					this.firestoreService.addWeightRecord(user?.authUser?.uid, weightRecord)
+					
+					this.firestoreService.addOrUpdateWeightRecord(user?.authUser?.uid, weightRecord)
 						.then(() =>
 						{
 							this.authService.refreshCurrentUser(false);
 							this.notificationService.presentToast("Success! 🎉", "Your weight has been logged.", "success", "top");
 							this.weightLoggerForm.reset();
+						}).catch((error) => 
+						{
+							console.error('Error adding record:', error)
+							this.notificationService.presentAlert("Uh oh! 😔", "A record for this date already exists. Please check your records.", "red");
 						});
 				}
 			}
