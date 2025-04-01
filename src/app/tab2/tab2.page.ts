@@ -40,8 +40,6 @@ export class Tab2Page
 				callbacks: {
 					label: (context) =>
 					{
-						console.log(context);
-						console.log(this.weightRecords);
 						const index = context.dataIndex;
 						const weight = context.raw; // The weight value
 						const record = this.weightRecords[index]; // Get the corresponding weight record
@@ -79,21 +77,20 @@ export class Tab2Page
 		const user = this.authService.getCurrentUser();
 		if (user)
 		{
-			this.firestoreService.getUserFromFirestore(user.authUser?.uid)
-				.then((user) =>
+			this.firestoreService.getAllWeightRecords(user.authUser?.uid)
+				.then((weightRecords: WeightRecord[]) =>
 				{
-					if (user)
+					if (weightRecords.length > 0)
 					{
 						// Filter weight records for the past 7 days
 						const sevenDaysAgo = new Date();
 						sevenDaysAgo.setDate(sevenDaysAgo.getDate() - daysToLoad);
 
-						this.weightRecords = user.weightRecords.filter((record) =>
+						this.weightRecords = weightRecords.filter((record) =>
 							new Date(record.timestamp) >= sevenDaysAgo
 						);
 
 						// Map weightRecords to chart data
-
 						this.lineChartData = {
 							datasets: [
 								{
