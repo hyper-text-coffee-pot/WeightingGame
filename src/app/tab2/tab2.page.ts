@@ -111,7 +111,9 @@ export class Tab2Page
 									label: 'Weight (lbs)',
 									borderColor: 'rgba(75,192,192,1)',
 									backgroundColor: 'rgba(75,192,192,0.2)',
-									fill: true
+									fill: true,
+									tension: 0.4,
+									pointRadius: 5
 								},
 							],
 							labels: Array.from({ length: daysToLoad }, (_, i) =>
