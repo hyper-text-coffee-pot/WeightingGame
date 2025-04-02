@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, setDoc, doc, updateDoc, arrayUnion, getDoc, addDoc, collection, getDocs, query, where } from '@angular/fire/firestore';
+import { Firestore, setDoc, doc, updateDoc, arrayUnion, getDoc, addDoc, collection, getDocs, query, where, Timestamp } from '@angular/fire/firestore';
 import { IWeightingGameUser } from '../abstractions/i-weighting-game-user';
 import { WeightRecord } from '../models/user/weight-record';
 import { WeightingGameUser } from '../models/user/weighting-game-user';
@@ -21,7 +21,7 @@ export class FirestoreService
 		const weightRecordsCollectionRef = collection(this.firestore, `users/${ userId }/weightRecords`);
 
 		// Extract the "date-only" part of the new record's timestamp in YYYY-MM-DD format
-		const newRecordDate = data.timestamp.split('T')[0]; // Extract date-only part from ISO string
+		const newRecordDate = data.timestamp.toDate().toISOString().split('T')[0]; // Extract date-only part from ISO string
 
 		// Query for existing records with the same "date-only" value
 		const startOfDay = new Date(`${ newRecordDate }T00:00:00.000Z`);
@@ -88,7 +88,8 @@ export class FirestoreService
 		// Use merge: true to avoid overwriting, make sure you just send an empty object.
 		return setDoc(doc(this.firestore, `users/${ userId }`), {
 			displayName: userDisplayName,
-			emailAddress: userEmail
+			emailAddress: userEmail,
+			signupTimestamp: Timestamp.now()
 		}, { merge: true });
 	}
 

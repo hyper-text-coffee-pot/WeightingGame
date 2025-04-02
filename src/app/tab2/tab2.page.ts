@@ -45,7 +45,7 @@ export class Tab2Page
 						const record = this.weightRecords[index]; // Get the corresponding weight record
 						if (record)
 						{
-							const timestamp = new Date(record.timestamp).toLocaleString('en-US', {
+							const timestamp = record.timestamp?.toDate().toLocaleString('en-US', {
 								month: 'long',
 								day: 'numeric',
 								year: 'numeric',
@@ -87,7 +87,7 @@ export class Tab2Page
 						sevenDaysAgo.setDate(sevenDaysAgo.getDate() - daysToLoad);
 
 						this.weightRecords = weightRecords.filter((record) =>
-							new Date(record.timestamp) >= sevenDaysAgo
+							record.timestamp?.toDate() >= sevenDaysAgo
 						);
 
 						// Map weightRecords to chart data
@@ -102,7 +102,7 @@ export class Tab2Page
 
 										// Find the weight record for this date
 										const record = this.weightRecords.find(
-											(record) => new Date(record.timestamp).toLocaleDateString('en-US') === formattedDate
+											(record) => record.timestamp.toDate().toLocaleDateString('en-US') === formattedDate
 										);
 
 										// Return the weight if a record exists, otherwise return null or 0

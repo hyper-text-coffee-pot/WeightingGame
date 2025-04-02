@@ -1,5 +1,6 @@
+import { Timestamp } from "@angular/fire/firestore";
 import { User } from "firebase/auth";
-import { WeightRecord } from "./weight-record";
+import { IWeightingGameUser } from "src/app/abstractions/i-weighting-game-user";
 
 export class WeightingGameUser
 {
@@ -19,11 +20,13 @@ export class WeightingGameUser
 
 	public isTutorialComplete: boolean = false;
 
-	public weightRecords: WeightRecord[] = [];
+	public signupTimestamp: Timestamp | undefined = undefined;
 
-	public MapFromFirestoreData(data: any): void
+	public MapFromFirestoreData(data: IWeightingGameUser): void
 	{
 		this.isTutorialComplete = data.isTutorialComplete;
-		this.weightRecords = data.weightRecords;
+		this.displayName = data.displayName;
+		this.emailAddress = data.emailAddress;
+		this.signupTimestamp = data.signupTimestamp;
 	}
 }
