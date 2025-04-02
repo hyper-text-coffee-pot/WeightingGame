@@ -12,6 +12,9 @@ import { ChartConfiguration, ChartType } from 'chart.js';
 })
 export class Tab2Page
 {
+	// Default to 7 days to load
+	private daysToLoad: number = 7;
+	
 	constructor(
 		private authService: AuthService,
 		private firestoreService: FirestoreService
@@ -72,7 +75,7 @@ export class Tab2Page
 
 	public lineChartLegend = false;
 
-	public loadHabits(event?: any, daysToLoad: number = 7): void
+	public loadHabits(event?: any): void
 	{
 		const user = this.authService.getCurrentUser();
 		if (user)
@@ -84,7 +87,7 @@ export class Tab2Page
 					{
 						// Filter weight records for the past 7 days
 						const sevenDaysAgo = new Date();
-						sevenDaysAgo.setDate(sevenDaysAgo.getDate() - daysToLoad);
+						sevenDaysAgo.setDate(sevenDaysAgo.getDate() - this.daysToLoad);
 
 						this.weightRecords = weightRecords.filter((record) =>
 							record.timestamp?.toDate() >= sevenDaysAgo
@@ -94,10 +97,10 @@ export class Tab2Page
 						this.lineChartData = {
 							datasets: [
 								{
-									data: Array.from({ length: daysToLoad }, (_, i) =>
+									data: Array.from({ length: this.daysToLoad }, (_, i) =>
 									{
 										const date = new Date();
-										date.setDate(date.getDate() - ((daysToLoad - 1) - i)); // Generate dates for the last 7 days
+										date.setDate(date.getDate() - ((this.daysToLoad - 1) - i)); // Generate dates for the last 7 days
 										const formattedDate = date.toLocaleDateString('en-US'); // Format as short date
 
 										// Find the weight record for this date
@@ -116,10 +119,10 @@ export class Tab2Page
 									pointRadius: 5
 								},
 							],
-							labels: Array.from({ length: daysToLoad }, (_, i) =>
+							labels: Array.from({ length: this.daysToLoad }, (_, i) =>
 							{
 								const date = new Date();
-								date.setDate(date.getDate() - ((daysToLoad - 1) - i)); // Generate dates for the last 7 days
+								date.setDate(date.getDate() - ((this.daysToLoad - 1) - i)); // Generate dates for the last 7 days
 								if (date.getFullYear() === new Date().getFullYear())
 								{
 									// Format as "Month Day"
@@ -145,6 +148,7 @@ export class Tab2Page
 	public onDaysToLoadChange(event: any): void
 	{
 		const daysToLoad = event.detail.value; // Get the selected value
-		this.loadHabits(undefined, daysToLoad); // Call loadHabits with the selected value
+		this.daysToLoad = daysToLoad; // Update the daysToLoad property
+		this.loadHabits(undefined); // Call loadHabits with the selected value
 	}
 }
