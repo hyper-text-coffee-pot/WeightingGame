@@ -1,10 +1,11 @@
+import { Timestamp } from '@angular/fire/firestore';
 import { v4 as uuidv4 } from 'uuid';
 
 export class WeightRecord
 {
 	public id: string = '';
 	public weightLbsOz: number = 0.0;
-	public timestamp: string = '';
+	public timestamp: Timestamp = Timestamp.now();
 
 	constructor(newWeightLbsOz?: number)
 	{
@@ -12,7 +13,7 @@ export class WeightRecord
 		{
 			this.id = uuidv4();
 			this.weightLbsOz = newWeightLbsOz;
-			this.timestamp = new Date().toISOString();
+			this.timestamp = Timestamp.now();
 		}
 	}
 

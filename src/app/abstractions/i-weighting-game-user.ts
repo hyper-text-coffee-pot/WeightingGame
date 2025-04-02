@@ -1,7 +1,9 @@
-import { WeightRecord } from "../models/user/weight-record";
+import { Timestamp } from "@angular/fire/firestore";
 
 export interface IWeightingGameUser
 {
 	isTutorialComplete: boolean;
-	weightRecords: WeightRecord[];
+	displayName: string;
+	emailAddress: string;
+	signupTimestamp: Timestamp | undefined;
 }

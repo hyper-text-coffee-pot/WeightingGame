@@ -110,12 +110,6 @@ export class AuthService
 						if (userDoc)
 						{
 							weightingGameUser.MapFromFirestoreData(userDoc);
-
-							if (!includeHabits)
-							{
-								weightingGameUser.weightRecords = [];
-							}
-
 							this.userStorageService.setUser(weightingGameUser);
 							resolve();
 						}
