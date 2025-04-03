@@ -1,6 +1,7 @@
 {
   "name": "weightinggame",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "versionName": "Peppy Platypus",
   "author": "Hanover Companies LLC",
   "homepage": "https://weightinggame.hypertextcoffeepot.com/",
   "scripts": {

@@ -29,6 +29,7 @@ export class Tab1Page
 					if (user)
 					{
 						this.isTutorialComplete = user.isTutorialComplete;
+						this.lastLoggedWeightLbsOz = user.lastLoggedWeightLbsOz;
 					}
 				});
 		}
@@ -42,6 +43,8 @@ export class Tab1Page
 	public isTutorialComplete: boolean = true;
 
 	public weightLoggerForm: FormGroup;
+
+	public lastLoggedWeightLbsOz: number = 150;
 
 	public closeCard(): void
 	{
@@ -75,11 +78,12 @@ export class Tab1Page
 					// Convert to consistent decimal format.
 					let newWeightLbsOz = parseFloat(this.weightLoggerForm.value.currentWeight.toFixed(2));
 					let weightRecord = new WeightRecord(newWeightLbsOz);
-					
+					await this.firestoreService.updateUser(user.authUser.uid, { lastLoggedWeightLbsOz: newWeightLbsOz });
+					this.lastLoggedWeightLbsOz = newWeightLbsOz;
 					this.firestoreService.addOrUpdateWeightRecord(user?.authUser?.uid, weightRecord)
 						.then(() =>
 						{
-							this.authService.refreshCurrentUser(false);
+							this.authService.refreshCurrentUser();
 							this.notificationService.presentToast("Success! 🎉", "Your weight has been logged.", "success", "top");
 							this.weightLoggerForm.reset();
 						}).catch((error) => 
