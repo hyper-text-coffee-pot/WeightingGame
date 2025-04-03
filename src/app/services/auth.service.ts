@@ -46,7 +46,7 @@ export class AuthService
 								{
 									if (userDoc != null && typeof userDoc !== 'undefined')
 									{
-										this.refreshCurrentUser(false)
+										this.refreshCurrentUser()
 											.then(() =>
 											{
 												this.router.navigate(['/tabs']);
@@ -59,7 +59,7 @@ export class AuthService
 											.then(() =>
 											{
 												// Regardless of whether the user has data in Firestore, set the user in local storage.
-												this.refreshCurrentUser(false)
+												this.refreshCurrentUser()
 													.then(() =>
 													{
 														this.router.navigate(['/tabs']);
@@ -91,12 +91,7 @@ export class AuthService
 		return this.userStorageService.getUser();
 	}
 
-	/**
-	 * When storing to local storage, the user's habits should not be included.
-	 * This method refreshes the user object in local storage with the user's habits.
-	 * @param includeHabits If true, the user's habits will be included in the user object.
-	 */
-	public refreshCurrentUser(includeHabits: boolean): Promise<void>
+	public refreshCurrentUser(): Promise<void>
 	{
 		return new Promise<void>((resolve, reject) =>
 		{

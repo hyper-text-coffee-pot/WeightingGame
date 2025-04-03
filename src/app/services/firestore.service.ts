@@ -113,7 +113,7 @@ export class FirestoreService
 		}
 	}
 
-	public updateUser(userId: string, data: any): Promise<any>
+	public updateUser(userId: string, data: object): Promise<any>
 	{
 		return updateDoc(doc(this.firestore, `users/${ userId }`), data);
 	}

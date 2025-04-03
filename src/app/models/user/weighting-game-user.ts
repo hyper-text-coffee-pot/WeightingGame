@@ -22,11 +22,18 @@ export class WeightingGameUser
 
 	public signupTimestamp: Timestamp | undefined = undefined;
 
+	/**
+	 * Default to 150 lbs for no particular reason.
+	 * This is a placeholder value until the user logs their weight for the first time.
+	 */
+	public lastLoggedWeightLbsOz: number = 150;
+
 	public MapFromFirestoreData(data: IWeightingGameUser): void
 	{
 		this.isTutorialComplete = data.isTutorialComplete;
 		this.displayName = data.displayName;
 		this.emailAddress = data.emailAddress;
 		this.signupTimestamp = data.signupTimestamp;
+		this.lastLoggedWeightLbsOz = data.lastLoggedWeightLbsOz;
 	}
 }
