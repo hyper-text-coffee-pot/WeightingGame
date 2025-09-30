@@ -7,4 +7,5 @@ export interface IWeightingGameUser
 	emailAddress: string;
 	signupTimestamp: Timestamp | undefined;
 	lastLoggedWeightLbsOz: number;
+	weightGoalLbsOz: number;
 }

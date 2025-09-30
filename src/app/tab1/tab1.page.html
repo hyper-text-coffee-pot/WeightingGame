@@ -22,25 +22,101 @@
 	</ion-card>
 	}
 
-	<div class="form-wrapper">
-		<form [formGroup]="weightLoggerForm"
-			  (ngSubmit)="logWeight()">
-			<ion-list>
-				<ion-list>
-					<ion-item>
-						<ion-input label="Enter Current Weight 🙂"
-								   labelPlacement="floating"
-								   type="number"
-								   placeholder="{{lastLoggedWeightLbsOz}}"
-								   name="currentWeight"
-								   formControlName="currentWeight"
-								   required="required"></ion-input>
+	<ion-card>
+		<img alt="A woman walking on a path with the sunning shining through the trees, she's on a walk, there are trees"
+			 src="assets/img/hero.jpg" />
+		<ion-card-header>
+			<ion-card-title>{{ getWeightGoalMessage() }}</ion-card-title>
+			<ion-card-subtitle>{{ getWeightGoalSubtitle() }}</ion-card-subtitle>
+		</ion-card-header>
+		<ion-card-content>
+			{{ getDailyQuote() }}
+		</ion-card-content>
+	</ion-card>
+	<ion-card class="center-text">
+		<ion-card-header>
+			<ion-card-title>
+				<ion-icon name="body-outline"></ion-icon> {{lastLoggedWeightLbsOz}} lbs
+			</ion-card-title>
+			<ion-card-subtitle>
+				Current Weight
+			</ion-card-subtitle>
+		</ion-card-header>
+		<ion-card-content>
+			<div class="form-wrapper">
+				<form [formGroup]="weightLoggerForm"
+					  (ngSubmit)="logWeight()">
+					<ion-list>
+						<ion-list>
+							<ion-item>
+								<ion-input label="Update weight"
+										   labelPlacement="floating"
+										   type="number"
+										   placeholder="{{lastLoggedWeightLbsOz}}"
+										   name="currentWeight"
+										   formControlName="currentWeight"
+										   required="required"></ion-input>
+							</ion-item>
+						</ion-list>
+					</ion-list>
+					<ion-button expand="block"
+								type="submit"
+								[disabled]="weightLoggerForm.invalid">
+						<ion-icon name="add-outline"></ion-icon>&nbsp;Log My Weight
+					</ion-button>
+				</form>
+			</div>
+		</ion-card-content>
+	</ion-card>
+	<ion-card class="center-text">
+		<ion-card-header>
+			<ion-card-title>
+				<ion-icon name="trophy-outline"></ion-icon> {{weightGoalLbsOz}} lbs
+			</ion-card-title>
+			<ion-card-subtitle>
+				Weight Goal
+			</ion-card-subtitle>
+		</ion-card-header>
+		<ion-card-content>
+			<ion-accordion-group #weightGoalGroup>
+				<ion-accordion value="first">
+					<ion-item slot="header"
+							  color="rose">
+						<ion-label>
+							<ion-icon name="create-outline"></ion-icon> Edit weight goal
+						</ion-label>
 					</ion-item>
-				</ion-list>
-			</ion-list>
-			<ion-button expand="block"
-						type="submit"
-						[disabled]="weightLoggerForm.invalid">Log My Weight</ion-button>
-		</form>
-	</div>
+					<div class="ion-padding"
+						 slot="content">
+						<div class="ion-padding"
+							 slot="content">
+							<div class="form-wrapper">
+								<form [formGroup]="weightGoalForm"
+									  (ngSubmit)="saveWeightGoal()">
+									<ion-list>
+										<ion-list>
+											<ion-item>
+												<ion-input label="Update weight goal"
+														   labelPlacement="floating"
+														   type="number"
+														   placeholder="{{weightGoalLbsOz}}"
+														   name="weightGoal"
+														   formControlName="weightGoal"
+														   required="required"></ion-input>
+											</ion-item>
+										</ion-list>
+									</ion-list>
+									<ion-button expand="block"
+												type="submit"
+												[disabled]="weightGoalForm.invalid">
+										<ion-icon name="save-outline"></ion-icon>&nbsp;Save Weight Goal
+									</ion-button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</ion-accordion>
+			</ion-accordion-group>
+		</ion-card-content>
+	</ion-card>
 </ion-content>

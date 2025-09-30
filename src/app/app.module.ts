@@ -12,13 +12,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigService } from './services/config.service';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 // Supply the Firebase configuration to the Firebase module.
-export function firebaseConfigFactory(configService: ConfigService)
-{
+export function firebaseConfigFactory(configService: ConfigService) {
 	const config = configService.firebaseConfig;
-	if (!config || Object.keys(config).length === 0)
-	{
+	if (!config || Object.keys(config).length === 0) {
 		throw new Error("Firebase config is missing!");
 	}
 	return config;
@@ -48,7 +47,8 @@ export function firebaseConfigFactory(configService: ConfigService)
 		provideAuth(() => getAuth()),
 		provideFirestore(() => getFirestore()),
 		provideAnalytics(() => getAnalytics()),
-		provideCharts(withDefaultRegisterables())
+		provideCharts(withDefaultRegisterables()),
+		provideHttpClient(withInterceptorsFromDi())
 	],
 	bootstrap: [AppComponent],
 })
