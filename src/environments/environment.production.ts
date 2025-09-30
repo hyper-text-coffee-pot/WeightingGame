@@ -3,6 +3,6 @@
 // Then include them in the environment.json file.
 export const environment = {
 	production: true,
-	version: "1.0.2",
+	version: "1.1.1",
 	versionName: "Peppy Platypus"
 };
