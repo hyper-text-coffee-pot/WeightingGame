@@ -21,24 +21,13 @@
 					(click)="closeCard()">Got It</ion-button>
 	</ion-card>
 	}
-
-	<ion-card>
-		<img alt="A woman walking on a path with the sunning shining through the trees, she's on a walk, there are trees"
-			 src="assets/img/hero.jpg" />
-		<ion-card-header>
-			<ion-card-title>{{ getWeightGoalMessage() }}</ion-card-title>
-			<ion-card-subtitle>{{ getWeightGoalSubtitle() }}</ion-card-subtitle>
-		</ion-card-header>
-		<ion-card-content>
-			{{ getDailyQuote() }}
-		</ion-card-content>
-	</ion-card>
+	<!-- Weight Display -->
 	<ion-card class="center-text">
 		<ion-card-header>
-			<ion-card-title>
+			<ion-card-title class="card-title">
 				<ion-icon name="body-outline"></ion-icon> {{lastLoggedWeightLbsOz}} lbs
 			</ion-card-title>
-			<ion-card-subtitle>
+			<ion-card-subtitle class="card-subtitle">
 				Current Weight
 			</ion-card-subtitle>
 		</ion-card-header>
@@ -68,12 +57,25 @@
 			</div>
 		</ion-card-content>
 	</ion-card>
+	<!-- Image Helper -->
+	<ion-card>
+		<img alt="A woman walking on a path with the sunning shining through the trees, she's on a walk, there are trees"
+			 src="assets/img/hero.jpg" />
+		<ion-card-header>
+			<ion-card-title>{{ getWeightGoalMessage() }}</ion-card-title>
+			<ion-card-subtitle>{{ getWeightGoalSubtitle() }}</ion-card-subtitle>
+		</ion-card-header>
+		<ion-card-content>
+			{{ getDailyQuote() }}
+		</ion-card-content>
+	</ion-card>
+	<!-- Weight Goal -->
 	<ion-card class="center-text">
 		<ion-card-header>
-			<ion-card-title>
+			<ion-card-title class="card-title">
 				<ion-icon name="trophy-outline"></ion-icon> {{weightGoalLbsOz}} lbs
 			</ion-card-title>
-			<ion-card-subtitle>
+			<ion-card-subtitle class="card-subtitle">
 				Weight Goal
 			</ion-card-subtitle>
 		</ion-card-header>

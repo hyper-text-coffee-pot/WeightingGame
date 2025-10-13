@@ -49,3 +49,12 @@
 div[slot='content'] {
 	background: rgba(var(--ion-color-rose-rgb), 0.25);
 }
+
+.card-title {
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+.card-subtitle {
+	font-size: 1.5rem;
+}
